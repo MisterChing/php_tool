@@ -43,6 +43,23 @@ class Utils {
         return $str;
     }
 
+    public static function genUUID($version = 3){
+        switch ($version) {
+            case 3:
+                $hash = md5('aaa');
+                return sprintf("%08s-%04s-%04s-%04s-%12s",
+                    substr($hash, 0, 8),
+                    substr($hash, 8, 4),
+                    substr($hash, 12, 4),
+                    substr($hash, 16, 4),
+                    substr($hash, 20, 12)
+                );
+                break;
+            default :
+                break;
+        }
+    }
+
 
 }
 
