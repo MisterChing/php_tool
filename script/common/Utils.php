@@ -37,7 +37,7 @@ class Utils {
     }
 
     public static function genPassword($password, $salt, $time, $upper = false){
-        $superKey = 'ching';
+        $superKey = 'y0xh';
         $str = hash('sha256', $superKey . $password . $salt . $time);
         $str = ($upper) ? strtoupper($str) : $str;
         return $str;
