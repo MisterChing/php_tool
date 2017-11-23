@@ -20,7 +20,7 @@ echo sprintf("123.398 * 2 = %s with 2 scale digits\n", BcmathUtils::mul('123.398
 echo sprintf("123.398 * 2 = %s with 3 scale digits\n", BcmathUtils::mul(123.398, 2, 3));
 echo "\n";
 
-echo "exact 105 / 6.55957 = 16.0071468\n";
+echo "exact 105 / 6.55957 = 16.00714680992809...\n";
 echo sprintf("105 / 5 = %s with 1 scale digits\n", BcmathUtils::div('105', 6.55957, 1));
 echo sprintf("105 / 5 = %s with 2 scale digits\n", BcmathUtils::div('105', 6.55957, 2));
 echo sprintf("105 / 5 = %s with 3 scale digits\n", BcmathUtils::div(105, 6.55957, 3));
