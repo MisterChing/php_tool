@@ -41,8 +41,8 @@ echo sprintf("4 sqrt = %s with 4 scale digits\n", BcmathUtils::sqrt('4', 4));
 echo "\n";
 
 echo "float problem in php\n";
-echo sprintf("intval(0.57 * 100) = %s\n", intval(0.57 * 100));
-echo sprintf("intval(bcmul(0.57, 100)) = %s\n", (int)BcmathUtils::mul(0.57, 100));
+echo sprintf("intval(0.57 * 100) = %d\n", intval(0.57 * 100));
+echo sprintf("intval(bcmul(0.57, 100)) = %d\n", (int)BcmathUtils::mul(0.57, 100));
 echo "\n";
 
 
