@@ -75,6 +75,9 @@ class PhpExcelComm {
         }
         $sheet->getStyle('A1:Z1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER)->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:Z1')->getFont()->setSize(13)->setBold(true);
+        $sheet->getDefaultRowDimension->setRowHeight(20);    //设置默认行高
+        $sheet->getDefaultColumnDimension->setWidth(18);    //设置默认列宽
+    
         // $sheet->getColumnDimension('B')->setAutoSize(true);
         $sheet->getColumnDimension('B')->setWidth(20);
         if (count($this->header) > 0) {
