@@ -3,6 +3,7 @@ class RedisComm {
 
     private static $instance = null;
     private static $redisIns = null;
+    private static $redisInsPool = [];
     private $redis;
 
     final private function __construct(){}
@@ -15,7 +16,8 @@ class RedisComm {
             $config['host'] = $_SERVER['SERVER_REDIS_HOST'];
             $config['port'] = $_SERVER['SERVER_REDIS_PORT'];
         }
-        if (!self::$redisIns) {
+        $hashKey = md5(implode($config, ','))
+        if (!self::$redisIns[$hashKey]) {
             self::$instance->initRedis($config);
         }
         return self::$instance;
@@ -24,7 +26,8 @@ class RedisComm {
     private function initRedis($config){
         $this->redis = new Redis();
         $this->redis->pconnect($config['host'], $config['port']);
-        self::$redisIns = $this->redis;
+        $hashKey = md5(implode($config, ','))
+        self::$redisInsPool[$hashKey] = $this->redis;
         return true;
     }
 
