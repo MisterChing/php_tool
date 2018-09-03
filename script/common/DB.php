@@ -1,17 +1,9 @@
 <?php
 class DB {
 
-    private static $instance = null;
-    private static $mysqli_instance = null;
-    private static $mysqli_instance_pool = [];
     private $mysqli;
 
-    final private function __construct(){}
-
-    public static function getInstance($config = []){
-        if (!self::$instance) {
-            self::$instance = new self();
-        }
+    final public function __construct($config){
         if (!$config) {
             $config['host'] = $_SERVER['SERVER_DB_HOST'];
             $config['user'] = $_SERVER['SERVER_DB_USER'];
@@ -19,11 +11,7 @@ class DB {
             $config['dbname'] = $_SERVER['SERVER_DB_NAME'];
             $config['port'] = $_SERVER['SERVER_DB_PORT'];
         }
-        $hashKey = md5(implode($config, ','));
-        if (!self::$mysqli_instance_pool[$hashKey]) {
-            self::$instance->initMysqli($config);
-        }
-        return self::$instance;
+        $this->initMysqli($config);
     }
 
     private function initMysqli($config){
@@ -33,8 +21,6 @@ class DB {
             Log::log_message('error', "errno: ".$this->mysqli->connect_errno . ' errmsg: '.$this->mysqli->connect_error);
             return false;
         }
-        $hashKey = md5(implode($config, ','));
-        self::$mysqli_instance_pool[$hashKey] = $this->mysqli;
         return true;
     }
 
