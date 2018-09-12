@@ -1,9 +1,11 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 set_time_limit(0);
+ini_set('memory_limit','512M');
 define('CODE_PATH', dirname(__FILE__));
 date_default_timezone_set("Asia/Shanghai");
 chdir(dirname(__FILE__));
+require '../vendor/autoload.php';
 $conf = getenv("CLI_CRON_CONF");
 if ($conf) {
     $_SERVER = array_merge($_SERVER, parse_ini_file($conf));

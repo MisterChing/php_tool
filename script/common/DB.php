@@ -28,14 +28,17 @@ class DB {
         if (!$this->mysqli) {
             return false;
         }
+	    unset($mysqli_result);
         $mysqli_result = $this->mysqli->query($sql);
         if (false === $mysqli_result) {
+	    $mysqli_result->free();
             $errmsg = 'mysql resource false,SQL:[ '.$sql.' ]';
             Log::log_message('error', $errmsg, 'ERROR');
             return false;
         }
         if ($mysqli_result && $mysqli_result->num_rows>0) {
             $data = $mysqli_result->fetch_assoc();
+            $mysqli_result->free();
             return $data;
         } else {
             return [];
@@ -47,14 +50,17 @@ class DB {
         if (!$this->mysqli) {
             return false;
         }
+        unset($mysqli_result);
         $mysqli_result = $this->mysqli->query($sql);
         if (false === $mysqli_result) {
+	    $mysqli_result->free();
             $errmsg = 'mysql resource false,SQL:[ '.$sql.' ]';
             Log::log_message('error', $errmsg, 'ERROR');
             return false;
         }
         if ($mysqli_result->num_rows > 0) {
             $data = $mysqli_result->fetch_all(MYSQLI_ASSOC);
+            $mysqli_result->free();
             return $data;
         } else {
             return [];
