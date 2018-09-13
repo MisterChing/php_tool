@@ -61,6 +61,35 @@ class Utils {
     }
 
 
+    public static function getLineFromFile($file) {
+        $fp = fopen($file, 'r');
+        while(!feof($fp)) {
+            $line = trim(fgets($fp, 4096));
+            !empty($line) && yield trim($line);
+        }
+        fclose($fp);
+    }
+
+    public static function exportCsv($header, $data, $filename) {
+        /*
+         * header('Content-Type: application/vnd.ms-excel'); // 文件格式
+         * header('Content-Type: charset=utf-8'); // 文件编码
+         * header('Content-Disposition: attachment; filenaeme='. $filename); // 文件名
+         * header('Content-Type: application/octet-stream'); // 二进制流
+         * header("Pragma: no-cache"); // 禁止缓存
+         * header("Expires: 0");// 有效期时间
+         */
+        $fp = fopen($filename,'w+');
+        fwrite($fp, chr(0xEF).chr(0xBB).chr(0xBF));//输出BOM头 解决中文乱码
+        fputcsv($fp, $header);
+        foreach ($data as $v) {
+            array_walk($v, function(&$value, $key){
+                is_numeric($value) && $value = "\t" . $value;
+            });
+            fputcsv($fp, $v);
+        }
+        fclose($fp);
+    }
 }
 
 

@@ -15,7 +15,7 @@ class PhpExcelComm {
          * $cacheMethod = PHPExcel_CachedObjectStorageFactory::cache_in_memory_gzip;
          * PHPExcel_Settings::setCacheStorageMethod($cacheMethod);
          */
-        ini_set('memory_limit', '128M');
+        ini_set('memory_limit', '512M');
         $this->instance = new PHPExcel();
         $this->instance->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT)->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         $this->instance->getDefaultStyle()->getFont()->setName('微软雅黑')->setSize(12);
@@ -75,8 +75,8 @@ class PhpExcelComm {
         }
         $sheet->getStyle('A1:Z1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER)->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $sheet->getStyle('A1:Z1')->getFont()->setSize(13)->setBold(true);
-        $sheet->getDefaultRowDimension->setRowHeight(20);    //设置默认行高
-        $sheet->getDefaultColumnDimension->setWidth(18);    //设置默认列宽
+        $sheet->getDefaultRowDimension()->setRowHeight(20);    //设置默认行高
+        $sheet->getDefaultColumnDimension()->setWidth(18);    //设置默认列宽
     
         // $sheet->getColumnDimension('B')->setAutoSize(true);
         $sheet->getColumnDimension('B')->setWidth(20);
