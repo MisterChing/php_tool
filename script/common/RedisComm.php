@@ -16,7 +16,7 @@ class RedisComm {
             $config['host'] = $_SERVER['SERVER_REDIS_HOST'];
             $config['port'] = $_SERVER['SERVER_REDIS_PORT'];
         }
-        $hashKey = md5(implode($config, ','))
+        $hashKey = md5(implode($config, ','));
         if (!self::$redisIns[$hashKey]) {
             self::$instance->initRedis($config);
         }
@@ -26,8 +26,8 @@ class RedisComm {
     private function initRedis($config){
         $this->redis = new Redis();
         $this->redis->pconnect($config['host'], $config['port']);
-        $hashKey = md5(implode($config, ','))
-        self::$redisInsPool[$hashKey] = $this->redis;
+        $hashKey = md5(implode($config, ','));
+        $this->redisInsPool[$hashKey] = $this->redis;
         return true;
     }
 
